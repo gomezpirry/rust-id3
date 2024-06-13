@@ -355,6 +355,16 @@ impl Encoder {
         self
     }
 
+    /// Enables or disables the unsynchronisation scheme.
+    ///
+    /// This avoids patterns that resemble MP3-frame headers from being
+    /// encoded. If you are encoding to MP3 files and wish to be compatible
+    /// with very old tools, you probably want this enabled.
+    pub fn experimental(mut self, experimental: bool) -> Self {
+        self.experimental = experimental;
+        self
+    }
+
     /// Enables or disables compression.
     pub fn compression(mut self, compression: bool) -> Self {
         self.compression = compression;
