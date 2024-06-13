@@ -307,6 +307,7 @@ pub fn decode_v2_frames(mut reader: impl io::Read) -> crate::Result<Tag> {
 pub struct Encoder {
     version: Version,
     unsynchronisation: bool,
+    experimental: bool,
     compression: bool,
     file_altered: bool,
     padding: Option<usize>,
@@ -323,6 +324,7 @@ impl Encoder {
         Self {
             version: Version::Id3v24,
             unsynchronisation: false,
+            experimental: false,
             compression: false,
             file_altered: false,
             padding: None,
@@ -390,6 +392,7 @@ impl Encoder {
 
         let mut flags = Flags::empty();
         flags.set(Flags::UNSYNCHRONISATION, self.unsynchronisation);
+        flags.set(Flags::EXPERIMENTAL, self.experimental);
         if self.version == Version::Id3v22 {
             flags.set(Flags::COMPRESSION, self.compression);
         }
